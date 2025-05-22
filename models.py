@@ -239,7 +239,7 @@ class Ordem(Base):
         return dados_user
 
 
-# Método para criar Banco
+# Metodo para criar Banco
 def init_db():
     Base.metadata.create_all(bind=engine)
 
