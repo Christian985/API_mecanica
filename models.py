@@ -1,5 +1,5 @@
-from sqlalchemy import create_engine, Column, Integer, String, ForeignKey
-from sqlalchemy.orm import scoped_session, sessionmaker, declarative_base, relationship
+from sqlalchemy import create_engine, Column, Integer, String
+from sqlalchemy.orm import scoped_session, sessionmaker, declarative_base
 from dotenv import load_dotenv
 import os  # Criar variável de ambiente '.env'
 import configparser  # Criar arquivo de configuração 'config.ini'
@@ -137,54 +137,6 @@ class Cliente(Base):
             'endereco': self.endereco,
         }
         return dados_user
-
-
-# Atividades
-# Dados mais importantes:
-# 1 - ID
-# 2 - nome
-# 3 - cpf
-# 4 - telefone
-# 5 - endereco
-# 6 - cliente_associado
-# 7 - status
-# 8 - descricao_servico
-# 9 - valor_estimado
-
-# Mais precisam de controle:
-# 1 - nome
-# 2 - cpf
-# 3 - telefone
-# 4 - endereco
-# 5 - modelo
-# 6 - ano_fabricacao
-# 7 - marca
-# 8 - placa
-class Atividade(Base):
-    # Tabela de Atividades
-    __tablename__ = 'atividades'
-    id = Column(Integer, primary_key=True)
-    nome = Column(String(80))
-    cpf = Column(Integer)
-    endereco = Column(String(80))
-    telefone = Column(Integer)
-    veiculo_associado = Column(String(80))
-    cliente_associado = Column(String(80))
-    modelo = Column(String(80))
-    placa = Column(String(80))
-    ano_fabricacao = Column(String(80))
-    marca = Column(String(80))
-    status = Column(String(80))
-    data_abertura = Column(String(80))
-    valor_estimado = Column(String(80))
-
-    # Id das Entidades
-    cliente_id = Column(Integer, ForeignKey('clientes.id'))
-    clientes = relationship('Cliente')
-    veiculo_id = Column(Integer, ForeignKey('veiculos.id'))
-    veiculos = relationship('Veiculo')
-    ordem_id = Column(Integer, ForeignKey('ordens.id'))
-    ordens = relationship('Ordem')
 
 
 # Ordens e Serviços
