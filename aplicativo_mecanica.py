@@ -1,29 +1,20 @@
 import flet as ft
 from flet import AppBar, Text, View
 from flet.core.colors import Colors
-
-
-# Classe do Usuário
-class User():
-    def __init__(self, nome, profissao, salario):
-        self.nome = nome
-        self.profissao = profissao
-        self.salario = int(salario)
+from models import Veiculo, Cliente, Ordem, db_session
 
 
 # Main
 def main(page: ft.Page):
     # Configurações
-    page.title = "Trabalho"
+    page.title = "Mecanica"
     page.theme_mode = ft.ThemeMode.DARK  # ou ft.ThemeMode.DARK
     page.window.width = 375
     page.window.height = 667
 
     # Funções
-    lista = []
-
     # Salva as informações
-    def salvar_tudo(e):
+    def salvar_veiculo(e):
         # Caso eles não possuam valores
         if input_profissao.value == "" or input_salario.value == "" or input_nome.value == "":
             # Overlay vai apagar a mensagem anterior
@@ -32,16 +23,22 @@ def main(page: ft.Page):
             msg_erro.open = True
             page.update()
         else:
-            obj_user = User(
-                nome=input_nome.value,
-                profissao=input_profissao.value,
-                salario=input_salario.value,
+            obj_user = Veiculo(
+                cliente_associado=input_cliente_associado.value,
+                modelo=input_modelo.value,
+                placa=input_placa.value,
+                ano_fabricacao=input_ano_fabricacao.value,
+                marca=input_marca.value,
+
             )
-            # Adiciona o Valor de input_nome, input_profissão e input_salário na Lista
-            lista.append(obj_user)
-            input_nome.value = ""
-            input_profissao.value = ""
-            input_salario.value = ""
+            # Adiciona o Valor de cliente_associado, modelo, placa, ano_fabricacao e marca na Lista
+            input_cliente_associado.value = ""
+            input_modelo.value = ""
+            input_placa.value = ""
+            input_ano_fabricacao.value = ""
+            input_marca.value = ""
+            db_session.add(obj_user)
+            db_session.commit()
             # Overlay vai apagar a mensagem anterior
             page.overlay.append(msg_sucesso)
             # Vai abrir a mensagem
@@ -49,15 +46,6 @@ def main(page: ft.Page):
             page.update()
 
     # FIM do salvamento
-
-    # Exibe a Lista
-    def exibir_lista(e):
-        lv_nome.controls.clear()
-        for use in lista:
-            lv_nome.controls.append(
-                ft.Text(value=f'Nome: {use.nome} - Profissão: {use.profissao} - Salário: {use.salario}')
-            )
-        page.update()
 
     # FIM da exibição da lista
 
