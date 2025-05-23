@@ -19,22 +19,6 @@ def atividades():
     return jsonify(resultado_atividades)
 
 
-# @app.route('/nova_categoria', methods=['POST'])
-# def criar_categoria():
-#     if request.method == 'GET':
-#         if not request.form['form_categoria']:
-#             return jsonify({'Erro'})
-#         else:
-#             form_evento = Categoria(nome_categoria=request.form['form_categoria'])
-#             print(form_evento)
-#             form_evento.save()
-#             db_session.close()
-#             jsonify({'Categoria criada', 'Sucesso'})
-#             return redirect(url_for('categoria'))
-#
-#     return jsonify({'Erro'})
-
-
 @app.route('/clientes', methods=['GET'])
 def clientes():
     sql_clientes = select(Cliente)
@@ -44,6 +28,11 @@ def clientes():
         lista_clientes.append(cliente.serialize_user())
         print(lista_clientes[-1])
     return jsonify(lista_de_clientes=lista_clientes)
+
+
+@app.route('/clientes', methods=['POST'])
+def cadastro_cliente():
+    return "eerre"
 
 
 @app.route('/veiculos', methods=['GET'])
@@ -57,6 +46,11 @@ def veiculos():
     return jsonify(lista_de_veiculos=lista_veiculos)
 
 
+@app.route('/veiculos', methods=['GET'])
+def cadastro_veiculo():
+    return "eerre"
+
+
 @app.route('/ordem', methods=['GET'])
 def ordens_servicos():
     sql_ordens = select(Ordem)
@@ -66,6 +60,11 @@ def ordens_servicos():
         lista_ordens.append(ordem.serialize_user())
         print(lista_ordens[-1])
     return jsonify(lista_de_ordens=lista_ordens)
+
+
+@app.route('/ordem', methods=['GET'])
+def cadastro_ordens_servicos():
+    return "eerre"
 
 
 if __name__ == '__main__':

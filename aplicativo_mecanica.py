@@ -16,7 +16,7 @@ def main(page: ft.Page):
     # Salva as informações
     def salvar_veiculo(e):
         # Caso eles não possuam valores
-        if input_profissao.value == "" or input_salario.value == "" or input_nome.value == "":
+        if input_cliente_associado.value == "" or input_modelo.value == "" or input_placa.value == "" or input_ano_fabricacao.value == "" or input_marca.value == "":
             # Overlay vai apagar a mensagem anterior
             page.overlay.append(msg_erro)
             # Vai abrir a mensagem
@@ -57,13 +57,15 @@ def main(page: ft.Page):
                 "/",
                 [
                     AppBar(title=Text("Home"), bgcolor=Colors.PRIMARY_CONTAINER),
-                    input_nome,
-                    input_profissao,
-                    input_salario,
+                    input_cliente_associado,
+                    input_modelo,
+                    input_placa,
+                    input_ano_fabricacao,
+                    input_marca,
                     # Irá salvar os Dados
                     ft.Button(
                         text="Salvar",
-                        on_click=lambda _: salvar_tudo(e),
+                        on_click=lambda _: salvar_veiculo(e),
                     ),
                     # Irá mostrar os Dados
                     ft.Button(
@@ -75,7 +77,6 @@ def main(page: ft.Page):
         )
         # Segunda Página
         if page.route == "/segunda" or page.route == "/terceira":
-            exibir_lista(e)
             page.views.append(
                 View(
                     "/segunda",
@@ -89,17 +90,16 @@ def main(page: ft.Page):
                     ],
                 )
             )
-        if page.route == "/terceira":
-            exibir_lista(e)
-            page.views.append(
-                View(
-                    "/terceira",
-                    [
-                        AppBar(title=Text("Lista"), bgcolor=Colors.SECONDARY_CONTAINER),
-                        lv_nome,
-                    ],
-                )
-            )
+        # if page.route == "/terceira":
+        #     page.views.append(
+        #         View(
+        #             "/terceira",
+        #             [
+        #                 AppBar(title=Text("Lista"), bgcolor=Colors.SECONDARY_CONTAINER),
+        #                 lv_nome,
+        #             ],
+        #         )
+        #     )
         page.update()
 
     # FIM da Transição de Páginas
@@ -120,9 +120,11 @@ def main(page: ft.Page):
         content=ft.Text("ERRO"),
         bgcolor=Colors.RED
     )
-    input_nome = ft.TextField(label="Nome")
-    input_profissao = ft.TextField(label="Profissão")
-    input_salario = ft.TextField(label="Salário")
+    input_cliente_associado = ft.TextField(label="Cliente Associado")
+    input_modelo = ft.TextField(label="Modelo")
+    input_placa = ft.TextField(label="Placa")
+    input_ano_fabricacao = ft.TextField(label="Ano de Fabricacao")
+    input_marca = ft.TextField(label="Marca")
 
     lv_nome = ft.ListView(
         height=500
