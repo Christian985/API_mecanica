@@ -35,35 +35,35 @@ def atividades():
 #     return jsonify({'Erro'})
 
 
-@app.route('/clientes', methods=['POST'])
+@app.route('/clientes', methods=['GET'])
 def clientes():
     sql_clientes = select(Cliente)
     resultado_clientes = db_session.execute(sql_clientes).scalars()
     lista_clientes = []
     for cliente in resultado_clientes:
-        lista_clientes.append(cliente.serialize_cliente())
+        lista_clientes.append(cliente.serialize_user())
         print(lista_clientes[-1])
     return jsonify(lista_de_clientes=lista_clientes)
 
 
-@app.route('/veiculos', methods=['POST'])
+@app.route('/veiculos', methods=['GET'])
 def veiculos():
     sql_veiculos = select(Veiculo)
     resultado_veiculos = db_session.execute(sql_veiculos).scalars()
     lista_veiculos = []
     for veiculo in resultado_veiculos:
-        lista_veiculos.append(veiculo.serialize_cliente())
+        lista_veiculos.append(veiculo.serialize_user())
         print(lista_veiculos[-1])
     return jsonify(lista_de_veiculos=lista_veiculos)
 
 
-@app.route('/ordem', methods=['POST'])
+@app.route('/ordem', methods=['GET'])
 def ordens_servicos():
     sql_ordens = select(Ordem)
     resultado_ordens = db_session.execute(sql_ordens).scalars()
     lista_ordens = []
     for ordem in resultado_ordens:
-        lista_ordens.append(ordem.serialize_cliente())
+        lista_ordens.append(ordem.serialize_user())
         print(lista_ordens[-1])
     return jsonify(lista_de_ordens=lista_ordens)
 

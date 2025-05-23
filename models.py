@@ -18,13 +18,13 @@ config = configparser.ConfigParser()
 config.read('config.ini')
 
 # Obtenha as configurações do Banco de Dados
-database_url =config['database']['url']
-print(f'mode2:{database_url}')
+# database_url =config['database']['url']
+# print(f'mode2:{database_url}')
 
 # Configuração com a conexão com o Banco de Dados SQLite Online e local
-engine = create_engine(database_url) # Conectar Vercel
+# engine = create_engine(database_url) # Conectar Vercel
 
-# engine = create_engine('sqlite:///atividades.sqlite3') # Conectar local alterado/substituído
+engine = create_engine('sqlite:///mecanica.sqlite3') # Conectar local alterado/substituído
 
 # Gerencia as sessões com o Banco de Dados
 db_session = scoped_session(sessionmaker(bind=engine))
