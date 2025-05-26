@@ -4,7 +4,6 @@ from dotenv import load_dotenv
 import os  # Criar variável de ambiente '.env'
 import configparser  # Criar arquivo de configuração 'config.ini'
 
-
 # Configurar Banco Vercel
 # Ler variável de ambiente
 load_dotenv()
@@ -24,18 +23,19 @@ config.read('config.ini')
 # Configuração com a conexão com o Banco de Dados SQLite Online e local
 # engine = create_engine(database_url) # Conectar Vercel
 
-engine = create_engine('sqlite:///mecanica.sqlite3') # Conectar local alterado/substituído
+engine = create_engine('sqlite:///mecanica.sqlite3')  # Conectar local alterado/substituído
 
 # Gerencia as sessões com o Banco de Dados
-#db_session = scoped_session(sessionmaker(bind=engine))
+# db_session = scoped_session(sessionmaker(bind=engine))
 Local_session = sessionmaker(bind=engine)
-
 
 # Base_declarativa - Ela permite que você defina Classes Python que representam tabelas de
 # Banco de Dados de forma declarativa, sem a necessidade de configurar manualmente a
 # relação entre as Classes e as Tabelas.
 Base = declarative_base()
-#Base.query = db_session.query_property()
+
+
+# Base.query = db_session.query_property()
 
 
 # Veículos
@@ -83,7 +83,7 @@ class Veiculo(Base):
 
     # Coloca os Dados na Tabela
     def serialize_user(self):
-        dados_user ={
+        dados_user = {
             'cliente_associado': self.cliente_associado,
             'modelo': self.modelo,
             'placa': self.placa,
@@ -119,10 +119,10 @@ class Cliente(Base):
     # Representação Classe
     def __repr__(self):
         return '<Cliente: {} {} {} {} {}>'.format(self.nome,
-                                            self.cpf,
-                                            self.email,
-                                            self.telefone,
-                                            self.endereco)
+                                                  self.cpf,
+                                                  self.email,
+                                                  self.telefone,
+                                                  self.endereco)
 
     # Função para Salvar no Banco
     def save(self, db_session):
@@ -173,12 +173,13 @@ class Ordem(Base):
     # Representação de Classe
     def __repr__(self):
         return '<Ordem: {} {} {} {} {}>'.format(self.veiculo_associado,
-                                                         self.data_abertura,
-                                                         self.descricao_servico,
-                                                         self.status,
-                                                         self.valor_estimado)
+                                                self.data_abertura,
+                                                self.descricao_servico,
+                                                self.status,
+                                                self.valor_estimado)
+
     # Função para Salvar
-    def save(self):
+    def save(self, db_session):
         db_session.add(self)
         db_session.commit()
 
@@ -202,6 +203,7 @@ class Ordem(Base):
 # Metodo para criar Banco
 def init_db():
     Base.metadata.create_all(bind=engine)
+
 
 # Iniciar o Banco
 if __name__ == '__main__':
