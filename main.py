@@ -48,7 +48,7 @@ def cadastro_cliente():
         if usuario_existente:
             return jsonify({"msg": "Usuário já existe"}), 400
 
-        novo_usuario = Cliente(nome=nome,cpf=cpf, telefone=telefone, email=email)
+        novo_usuario = Cliente(nome=nome, cpf=cpf, telefone=telefone, email=email)
         novo_usuario.set_senha_hash(senha)
         novo_usuario.save(db_session)
 
@@ -58,6 +58,7 @@ def cadastro_cliente():
         return jsonify({"msg": f"Erro ao registrar usuário: {str(e)}"}), 500
     finally:
         db_session.close()
+
 
 @app.route('/veiculos', methods=['GET'])
 def veiculos():
@@ -91,7 +92,6 @@ def ordens_servicos():
 @app.route('/ordem', methods=['GET'])
 def cadastro_ordens_servicos():
     dados = request.get_json()
-
 
 
 if __name__ == '__main__':
