@@ -27,14 +27,15 @@ config.read('config.ini')
 engine = create_engine('sqlite:///mecanica.sqlite3') # Conectar local alterado/substituído
 
 # Gerencia as sessões com o Banco de Dados
-db_session = scoped_session(sessionmaker(bind=engine))
+#db_session = scoped_session(sessionmaker(bind=engine))
+Local_session = sessionmaker(bind=engine)
 
 
 # Base_declarativa - Ela permite que você defina Classes Python que representam tabelas de
 # Banco de Dados de forma declarativa, sem a necessidade de configurar manualmente a
 # relação entre as Classes e as Tabelas.
 Base = declarative_base()
-Base.query = db_session.query_property()
+#Base.query = db_session.query_property()
 
 
 # Veículos
@@ -67,9 +68,13 @@ class Veiculo(Base):
                                                   self.marca)
 
     # Função para Salvar no Banco
-    def save(self):
-        db_session.add(self)
-        db_session.commit()
+    def save(self, db_session):
+        try:
+            db_session.add(self)
+            db_session.commit()
+        except Exception as e:
+            db_session.rollback()
+            raise e
 
     # Função para Deletar no Banco
     def delete(self):
@@ -107,18 +112,20 @@ class Cliente(Base):
     id = Column(Integer, primary_key=True)
     nome = Column(String(100), nullable=False, index=True)
     cpf = Column(Integer, nullable=False, index=True)
+    email = Column(String(100), nullable=False, index=True)
     telefone = Column(Integer, nullable=False, index=True)
     endereco = Column(String(100), nullable=False, index=True)
 
     # Representação Classe
     def __repr__(self):
-        return '<Cliente: {} {} {} {}>'.format(self.nome,
+        return '<Cliente: {} {} {} {} {}>'.format(self.nome,
                                             self.cpf,
+                                            self.email,
                                             self.telefone,
                                             self.endereco)
 
     # Função para Salvar no Banco
-    def save(self):
+    def save(self, db_session):
         db_session.add(self)
         db_session.commit()
 
@@ -133,6 +140,7 @@ class Cliente(Base):
             'id_user': self.id,
             'nome': self.nome,
             'cpf': self.cpf,
+            'email': self.email,
             'telefone': self.telefone,
             'endereco': self.endereco,
         }
