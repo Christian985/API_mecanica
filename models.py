@@ -126,8 +126,12 @@ class Cliente(Base):
 
     # Função para Salvar no Banco
     def save(self, db_session):
-        db_session.add(self)
-        db_session.commit()
+        try:
+            db_session.add(self)
+            db_session.commit()
+        except Exception as e:
+            db_session.rollback()
+            raise e
 
     # Função para Deletar
     def delete(self):
@@ -180,8 +184,12 @@ class Ordem(Base):
 
     # Função para Salvar
     def save(self, db_session):
-        db_session.add(self)
-        db_session.commit()
+        try:
+            db_session.add(self)
+            db_session.commit()
+        except Exception as e:
+            db_session.rollback()
+            raise e
 
     # Função para Deletar
     def delete(self):
