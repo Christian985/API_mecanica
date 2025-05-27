@@ -120,6 +120,20 @@ def ordens_servicos():
 @app.route('/ordem', methods=['GET'])
 def cadastro_ordens_servicos():
     dados = request.get_json()
+    veiculo_associado = dados['veiculo_associado']
+    data_abertura = dados['data_abertura']
+    descricao_servico = dados['descricao_servico']
+    status = dados['status']
+    valor_estimado = dados['valor_estimado']
+
+    if not veiculo_associado or not data_abertura or not descricao_servico or not status or not valor_estimado:
+        return jsonify({"msg": "Informações obrigatórias não cumpridas"}), 400
+
+    db_session = Local_session()
+    try:
+        # Verificar se já existe
+        ordem_check = select(Ordem).where(Ordem.status == status)
+        ordem_existente = db_session.execute(ordem_check).scalar()
 
 
 if __name__ == '__main__':
