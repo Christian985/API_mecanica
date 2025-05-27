@@ -74,7 +74,35 @@ def veiculos():
 
 @app.route('/veiculos', methods=['GET'])
 def cadastro_veiculo():
-    return ""
+    dados = request.get_json()
+    cliente_associado = dados['cliente_associado']
+    modelo = dados['modelo']
+    placa = dados['placa']
+    ano_fabricacao = dados['ano_fabricacao']
+    marca = dados['marca']
+
+    if not cliente_associado or not modelo or not placa or not ano_fabricacao or not marca:
+        return  jsonify({"msg": "Informações obrigatórias não cumpridas"}), 400
+
+    db_session = Local_session()
+    try:
+        # Verificar se Já existe
+        veiculo_check = select(Veiculo).where(Veiculo.modelo == modelo)
+        veiculo_existente = db_session.execute(veiculo_check).scalar()
+
+        if veiculo_existente:
+            return jsonify({"msg": "Veículo já existente"}), 400
+
+        novo_veiculo = Veiculo(cliente_associado=cliente_associado, modelo=modelo, placa=placa, ano_fabricacao=ano_fabricacao, marca=marca)
+        novo_veiculo.set_senha_hash(senha)
+        novo_veiculo.save(db_session)
+
+        veiculo_id = novo_veiculo.id
+        return jsonify({"Msg": "Veículo criado com sucesso", "veiculo_id": veiculo_id}), 201
+    except SQLAlchemyError as e:
+        return jsonify({"msg": f"Erro ao registrar veiculo: {str(e)}"}), 500
+    finally:
+        db_session.close()
 
 
 @app.route('/ordem', methods=['GET'])
