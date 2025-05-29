@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dataSource name="Mecanica">
+<dataSource name="mecanica">
   <database-model serializer="dbm" dbms="SQLITE" family-id="SQLITE" format-version="4.53">
     <root id="1">
       <ServerVersion>3.45.1</ServerVersion>
@@ -499,7 +499,7 @@
     </routine>
     <schema id="191" parent="1" name="main">
       <Current>1</Current>
-      <LastIntrospectionLocalTimestamp>2025-05-26.19:14:06</LastIntrospectionLocalTimestamp>
+      <LastIntrospectionLocalTimestamp>2025-05-29.15:42:19</LastIntrospectionLocalTimestamp>
     </schema>
     <argument id="192" parent="16">
       <ArgumentDirection>R</ArgumentDirection>
@@ -1590,257 +1590,176 @@
     <argument id="554" parent="190">
       <Position>1</Position>
     </argument>
-    <table id="555" parent="191" name="atividades"/>
-    <table id="556" parent="191" name="clientes"/>
-    <table id="557" parent="191" name="ordens"/>
-    <table id="558" parent="191" name="sqlite_master">
+    <table id="555" parent="191" name="clientes"/>
+    <table id="556" parent="191" name="ordens"/>
+    <table id="557" parent="191" name="sqlite_master">
       <System>1</System>
     </table>
-    <table id="559" parent="191" name="veiculos"/>
-    <column id="560" parent="555" name="id">
+    <table id="558" parent="191" name="veiculos"/>
+    <column id="559" parent="555" name="id">
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>INTEGER|0s</StoredType>
     </column>
-    <column id="561" parent="555" name="nome">
+    <column id="560" parent="555" name="nome">
+      <NotNull>1</NotNull>
       <Position>2</Position>
-      <StoredType>VARCHAR(80)|0s</StoredType>
+      <StoredType>VARCHAR(100)|0s</StoredType>
     </column>
-    <column id="562" parent="555" name="cpf">
+    <column id="561" parent="555" name="cpf">
+      <NotNull>1</NotNull>
       <Position>3</Position>
       <StoredType>INTEGER|0s</StoredType>
     </column>
-    <column id="563" parent="555" name="endereco">
+    <column id="562" parent="555" name="email">
+      <NotNull>1</NotNull>
       <Position>4</Position>
-      <StoredType>VARCHAR(80)|0s</StoredType>
+      <StoredType>VARCHAR(100)|0s</StoredType>
     </column>
-    <column id="564" parent="555" name="telefone">
+    <column id="563" parent="555" name="telefone">
+      <NotNull>1</NotNull>
       <Position>5</Position>
       <StoredType>INTEGER|0s</StoredType>
     </column>
-    <column id="565" parent="555" name="veiculo_associado">
+    <column id="564" parent="555" name="endereco">
+      <NotNull>1</NotNull>
       <Position>6</Position>
-      <StoredType>VARCHAR(80)|0s</StoredType>
-    </column>
-    <column id="566" parent="555" name="cliente_associado">
-      <Position>7</Position>
-      <StoredType>VARCHAR(80)|0s</StoredType>
-    </column>
-    <column id="567" parent="555" name="modelo">
-      <Position>8</Position>
-      <StoredType>VARCHAR(80)|0s</StoredType>
-    </column>
-    <column id="568" parent="555" name="placa">
-      <Position>9</Position>
-      <StoredType>VARCHAR(80)|0s</StoredType>
-    </column>
-    <column id="569" parent="555" name="ano_fabricacao">
-      <Position>10</Position>
-      <StoredType>VARCHAR(80)|0s</StoredType>
-    </column>
-    <column id="570" parent="555" name="marca">
-      <Position>11</Position>
-      <StoredType>VARCHAR(80)|0s</StoredType>
-    </column>
-    <column id="571" parent="555" name="status">
-      <Position>12</Position>
-      <StoredType>VARCHAR(80)|0s</StoredType>
-    </column>
-    <column id="572" parent="555" name="data_abertura">
-      <Position>13</Position>
-      <StoredType>VARCHAR(80)|0s</StoredType>
-    </column>
-    <column id="573" parent="555" name="valor_estimado">
-      <Position>14</Position>
-      <StoredType>VARCHAR(80)|0s</StoredType>
-    </column>
-    <column id="574" parent="555" name="cliente_id">
-      <Position>15</Position>
-      <StoredType>INTEGER|0s</StoredType>
-    </column>
-    <column id="575" parent="555" name="veiculo_id">
-      <Position>16</Position>
-      <StoredType>INTEGER|0s</StoredType>
-    </column>
-    <column id="576" parent="555" name="ordem_id">
-      <Position>17</Position>
-      <StoredType>INTEGER|0s</StoredType>
-    </column>
-    <foreign-key id="577" parent="555">
-      <ColNames>cliente_id</ColNames>
-      <RefColNames>id</RefColNames>
-      <RefTableName>clientes</RefTableName>
-    </foreign-key>
-    <foreign-key id="578" parent="555">
-      <ColNames>veiculo_id</ColNames>
-      <RefColNames>id</RefColNames>
-      <RefTableName>veiculos</RefTableName>
-    </foreign-key>
-    <foreign-key id="579" parent="555">
-      <ColNames>ordem_id</ColNames>
-      <RefColNames>id</RefColNames>
-      <RefTableName>ordens</RefTableName>
-    </foreign-key>
-    <key id="580" parent="555">
-      <ColNames>id</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <column id="581" parent="556" name="id">
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-      <StoredType>INTEGER|0s</StoredType>
-    </column>
-    <column id="582" parent="556" name="nome">
-      <NotNull>1</NotNull>
-      <Position>2</Position>
       <StoredType>VARCHAR(100)|0s</StoredType>
     </column>
-    <column id="583" parent="556" name="cpf">
-      <NotNull>1</NotNull>
-      <Position>3</Position>
-      <StoredType>INTEGER|0s</StoredType>
-    </column>
-    <column id="584" parent="556" name="telefone">
-      <NotNull>1</NotNull>
-      <Position>4</Position>
-      <StoredType>INTEGER|0s</StoredType>
-    </column>
-    <column id="585" parent="556" name="endereco">
-      <NotNull>1</NotNull>
-      <Position>5</Position>
-      <StoredType>VARCHAR(100)|0s</StoredType>
-    </column>
-    <index id="586" parent="556" name="ix_clientes_nome">
+    <index id="565" parent="555" name="ix_clientes_nome">
       <ColNames>nome</ColNames>
     </index>
-    <index id="587" parent="556" name="ix_clientes_cpf">
+    <index id="566" parent="555" name="ix_clientes_cpf">
       <ColNames>cpf</ColNames>
     </index>
-    <index id="588" parent="556" name="ix_clientes_telefone">
+    <index id="567" parent="555" name="ix_clientes_email">
+      <ColNames>email</ColNames>
+    </index>
+    <index id="568" parent="555" name="ix_clientes_telefone">
       <ColNames>telefone</ColNames>
     </index>
-    <index id="589" parent="556" name="ix_clientes_endereco">
+    <index id="569" parent="555" name="ix_clientes_endereco">
       <ColNames>endereco</ColNames>
     </index>
-    <key id="590" parent="556">
+    <key id="570" parent="555">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="591" parent="557" name="id">
+    <column id="571" parent="556" name="id">
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>INTEGER|0s</StoredType>
     </column>
-    <column id="592" parent="557" name="veiculo_associado">
+    <column id="572" parent="556" name="veiculo_associado">
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StoredType>VARCHAR(100)|0s</StoredType>
     </column>
-    <column id="593" parent="557" name="data_abertura">
+    <column id="573" parent="556" name="data_abertura">
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StoredType>VARCHAR(100)|0s</StoredType>
     </column>
-    <column id="594" parent="557" name="descricao_servico">
+    <column id="574" parent="556" name="descricao_servico">
       <NotNull>1</NotNull>
       <Position>4</Position>
       <StoredType>VARCHAR(100)|0s</StoredType>
     </column>
-    <column id="595" parent="557" name="status">
+    <column id="575" parent="556" name="status">
       <NotNull>1</NotNull>
       <Position>5</Position>
       <StoredType>VARCHAR(100)|0s</StoredType>
     </column>
-    <column id="596" parent="557" name="valor_estimado">
+    <column id="576" parent="556" name="valor_estimado">
       <NotNull>1</NotNull>
       <Position>6</Position>
       <StoredType>INTEGER|0s</StoredType>
     </column>
-    <index id="597" parent="557" name="ix_ordens_veiculo_associado">
+    <index id="577" parent="556" name="ix_ordens_veiculo_associado">
       <ColNames>veiculo_associado</ColNames>
     </index>
-    <index id="598" parent="557" name="ix_ordens_data_abertura">
+    <index id="578" parent="556" name="ix_ordens_data_abertura">
       <ColNames>data_abertura</ColNames>
     </index>
-    <index id="599" parent="557" name="ix_ordens_descricao_servico">
+    <index id="579" parent="556" name="ix_ordens_descricao_servico">
       <ColNames>descricao_servico</ColNames>
     </index>
-    <index id="600" parent="557" name="ix_ordens_status">
+    <index id="580" parent="556" name="ix_ordens_status">
       <ColNames>status</ColNames>
     </index>
-    <index id="601" parent="557" name="ix_ordens_valor_estimado">
+    <index id="581" parent="556" name="ix_ordens_valor_estimado">
       <ColNames>valor_estimado</ColNames>
     </index>
-    <key id="602" parent="557">
+    <key id="582" parent="556">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="603" parent="558" name="type">
+    <column id="583" parent="557" name="type">
       <Position>1</Position>
       <StoredType>TEXT|0s</StoredType>
     </column>
-    <column id="604" parent="558" name="name">
+    <column id="584" parent="557" name="name">
       <Position>2</Position>
       <StoredType>TEXT|0s</StoredType>
     </column>
-    <column id="605" parent="558" name="tbl_name">
+    <column id="585" parent="557" name="tbl_name">
       <Position>3</Position>
       <StoredType>TEXT|0s</StoredType>
     </column>
-    <column id="606" parent="558" name="rootpage">
+    <column id="586" parent="557" name="rootpage">
       <Position>4</Position>
       <StoredType>INT|0s</StoredType>
     </column>
-    <column id="607" parent="558" name="sql">
+    <column id="587" parent="557" name="sql">
       <Position>5</Position>
       <StoredType>TEXT|0s</StoredType>
     </column>
-    <column id="608" parent="559" name="id">
+    <column id="588" parent="558" name="id">
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>INTEGER|0s</StoredType>
     </column>
-    <column id="609" parent="559" name="cliente_associado">
+    <column id="589" parent="558" name="cliente_associado">
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StoredType>VARCHAR(100)|0s</StoredType>
     </column>
-    <column id="610" parent="559" name="modelo">
+    <column id="590" parent="558" name="modelo">
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StoredType>VARCHAR(100)|0s</StoredType>
     </column>
-    <column id="611" parent="559" name="placa">
+    <column id="591" parent="558" name="placa">
       <NotNull>1</NotNull>
       <Position>4</Position>
       <StoredType>VARCHAR(100)|0s</StoredType>
     </column>
-    <column id="612" parent="559" name="ano_fabricacao">
+    <column id="592" parent="558" name="ano_fabricacao">
       <NotNull>1</NotNull>
       <Position>5</Position>
       <StoredType>INTEGER|0s</StoredType>
     </column>
-    <column id="613" parent="559" name="marca">
+    <column id="593" parent="558" name="marca">
       <NotNull>1</NotNull>
       <Position>6</Position>
       <StoredType>VARCHAR(100)|0s</StoredType>
     </column>
-    <index id="614" parent="559" name="ix_veiculos_cliente_associado">
+    <index id="594" parent="558" name="ix_veiculos_cliente_associado">
       <ColNames>cliente_associado</ColNames>
     </index>
-    <index id="615" parent="559" name="ix_veiculos_modelo">
+    <index id="595" parent="558" name="ix_veiculos_modelo">
       <ColNames>modelo</ColNames>
     </index>
-    <index id="616" parent="559" name="ix_veiculos_placa">
+    <index id="596" parent="558" name="ix_veiculos_placa">
       <ColNames>placa</ColNames>
     </index>
-    <index id="617" parent="559" name="ix_veiculos_ano_fabricacao">
+    <index id="597" parent="558" name="ix_veiculos_ano_fabricacao">
       <ColNames>ano_fabricacao</ColNames>
     </index>
-    <index id="618" parent="559" name="ix_veiculos_marca">
+    <index id="598" parent="558" name="ix_veiculos_marca">
       <ColNames>marca</ColNames>
     </index>
-    <key id="619" parent="559">
+    <key id="599" parent="558">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
