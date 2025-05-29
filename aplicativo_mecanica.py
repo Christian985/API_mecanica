@@ -58,15 +58,15 @@ def main(page: ft.Page):
                 [
                     AppBar(title=Text("Home"), bgcolor=Colors.PRIMARY_CONTAINER),
                     ft.Button(
-                        text="Cadastrar veículos",
+                        text="Cadastrar Veículos",
                         on_click=lambda _: page.go("cadastro_veiculos"),
                     ),
                     ft.Button(
-                        text="Cadastrar clientes",
+                        text="Cadastrar Clientes",
                         on_click=lambda _: page.go("cadastro_clientes"),
                     ),
                     ft.Button(
-                        text="Cadastrar ordens",
+                        text="Cadastrar Ordens",
                         on_click=lambda _: page.go("cadastro_ordens"),
                     )
                 ],
@@ -122,7 +122,7 @@ def main(page: ft.Page):
                         input_nome,
                         input_cpf,
                         input_telefone,
-                        input_endereço,
+                        input_endereco,
                         input_email,
                         ft.Button(
                             text="Salvar",
@@ -146,6 +146,40 @@ def main(page: ft.Page):
                     ],
                 )
             )
+        # Cadastro de Ordens
+        if page.route == "/cadastro_ordens" or page.route == "/lista_ordens":
+            page.views.append(
+                View(
+                    "/cadastro_ordens",
+                    [
+                        AppBar(title=Text("Cadastro de Ordens"), bgcolor=Colors.PRIMARY_CONTAINER),
+                        input_veiculo_associado,
+                        input_data_abertura,
+                        input_descricao_servico,
+                        input_status,
+                        input_valor_estimado,
+                        ft.Button(
+                            text="Salvar",
+                            on_click=lambda _: page.go("lista_ordens"),
+                        )
+                    ]
+                )
+            )
+            # Lista de Ordens
+            if page.route == "/lista_ordens":
+                page.views.append(
+                    View(
+                        "/Lista_ordens",
+                        [
+                            AppBar(title=Text("Lista de Ordens"), bgcolor=Colors.SECONDARY_CONTAINER),
+                            lv_nome,
+                            ft.Button(
+                                text="ir",
+                                on_click=lambda _: page.go("/terceira"),
+                            )
+                        ],
+                    )
+                )
         page.update()
 
     # FIM da Transição de Páginas
@@ -177,8 +211,15 @@ def main(page: ft.Page):
     input_nome = ft.TextField(label="Nome")
     input_cpf = ft.TextField(label="CPF")
     input_telefone = ft.TextField(label="Telefone")
-    input_endereço = ft.TextField(label="Endereço")
+    input_endereco = ft.TextField(label="Endereço")
     input_email = ft.TextField(label="E-mail")
+
+    # ORDENS
+    input_veiculo_associado = ft.TextField(label="Veículo Associado")
+    input_data_abertura = ft.TextField(label="Data abertura")
+    input_descricao_servico = ft.TextField(label="Descrição de Serviço")
+    input_status = ft.TextField(label="Status")
+    input_valor_estimado = ft.TextField(label="Valor Estimado")
     lv_nome = ft.ListView(
         height=500
     )
