@@ -1,7 +1,7 @@
 import flet as ft
 from flet import AppBar, Text, View
 from flet.core.colors import Colors
-from models import Veiculo, Cliente, Ordem, db_session
+from models import Veiculo, Cliente, Ordem, Local_session
 
 
 # Main
@@ -13,7 +13,7 @@ def main(page: ft.Page):
     page.window.height = 667
 
     # Funções
-    # Salva as informações
+    # Salva as informações!
     def salvar_veiculo(e):
         # Caso eles não possuam valores
         if input_cliente_associado.value == "" or input_modelo.value == "" or input_placa.value == "" or input_ano_fabricacao.value == "" or input_marca.value == "":

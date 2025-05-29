@@ -1,6 +1,8 @@
 import requests
 from sqlalchemy import create_engine, select
-from models import Veiculo, Cliente, Ordem, db_session
+from sqlalchemy.exc import SQLAlchemyError
+
+from models import Veiculo, Cliente, Ordem, Local_session
 from flask import Flask, request, redirect, url_for, request, jsonify
 from flask_pydantic_spec import FlaskPydanticSpec
 
@@ -14,16 +16,18 @@ spec.register(app)
 
 @app.route('/clientes', methods=['GET'])
 def clientes():
+    db_session = Local_session()
     sql_clientes = select(Cliente)
     resultado_clientes = db_session.execute(sql_clientes).scalars()
     lista_clientes = []
     for cliente in resultado_clientes:
         lista_clientes.append(cliente.serialize_user())
         print(lista_clientes[-1])
+    db_session.close()
     return jsonify(lista_de_clientes=lista_clientes)
 
 
-@app.route('/cadastro_clientes', methods=['POST'])
+@app.route('/clientes', methods=['POST'])
 def cadastro_cliente():
     dados = request.get_json()
     nome = dados['nome']
@@ -35,7 +39,7 @@ def cadastro_cliente():
     if not nome or not email or not cpf or not telefone:
         return jsonify({"msg": "Nome de usuário e senha são obrigatórios"}), 400
 
-    db_session = db_session.session()
+    db_session = Local_session()
     try:
         # Verificar se o usuário já existe
         user_check = select(Cliente).where(Cliente.email == email)
@@ -44,21 +48,21 @@ def cadastro_cliente():
         if usuario_existente:
             return jsonify({"msg": "Usuário já existe"}), 400
 
-        novo_usuario = Cliente(nome=nome,cpf=cpf, telefone=telefone, email=email)
+        novo_usuario = Cliente(nome=nome, cpf=cpf, telefone=telefone, email=email)
         novo_usuario.set_senha_hash(senha)
-        db_session.add(novo_usuario)
-        db_session.commit()
+        novo_usuario.save(db_session)
 
         user_id = novo_usuario.id
         return jsonify({"msg": "Usuário criado com sucesso", "user_id": user_id}), 201
-    except Exception as e:
-        db_session.rollback()
+    except SQLAlchemyError as e:
         return jsonify({"msg": f"Erro ao registrar usuário: {str(e)}"}), 500
     finally:
         db_session.close()
 
+
 @app.route('/veiculos', methods=['GET'])
 def veiculos():
+    db_session = Local_session()
     sql_veiculos = select(Veiculo)
     resultado_veiculos = db_session.execute(sql_veiculos).scalars()
     lista_veiculos = []
@@ -75,6 +79,7 @@ def cadastro_veiculo():
 
 @app.route('/ordem', methods=['GET'])
 def ordens_servicos():
+    db_session = Local_session()
     sql_ordens = select(Ordem)
     resultado_ordens = db_session.execute(sql_ordens).scalars()
     lista_ordens = []
@@ -87,7 +92,6 @@ def ordens_servicos():
 @app.route('/ordem', methods=['GET'])
 def cadastro_ordens_servicos():
     dados = request.get_json()
-
 
 
 if __name__ == '__main__':
