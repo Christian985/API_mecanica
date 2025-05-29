@@ -56,6 +56,7 @@ def cadastro_cliente():
         return jsonify({"msg": "Usuário criado com sucesso", "user_id": user_id}), 201
     except SQLAlchemyError as e:
         return jsonify({"msg": f"Erro ao registrar usuário: {str(e)}"}), 500
+    # Fecha a sessão e abre outra, por segurança
     finally:
         db_session.close()
 
@@ -72,7 +73,7 @@ def veiculos():
     return jsonify(lista_de_veiculos=lista_veiculos)
 
 
-@app.route('/veiculos', methods=['GET'])
+@app.route('/veiculos', methods=['POST'])
 def cadastro_veiculo():
     dados = request.get_json()
     cliente_associado = dados['cliente_associado']
@@ -101,6 +102,7 @@ def cadastro_veiculo():
         return jsonify({"Msg": "Veículo criado com sucesso", "veiculo_id": veiculo_id}), 201
     except SQLAlchemyError as e:
         return jsonify({"msg": f"Erro ao registrar veiculo: {str(e)}"}), 500
+    # Fecha a sessão e abre outra, por segurança
     finally:
         db_session.close()
 
@@ -117,7 +119,7 @@ def ordens_servicos():
     return jsonify(lista_de_ordens=lista_ordens)
 
 
-@app.route('/ordem', methods=['GET'])
+@app.route('/ordem', methods=['POST'])
 def cadastro_ordens_servicos():
     dados = request.get_json()
     veiculo_associado = dados['veiculo_associado']
@@ -134,6 +136,21 @@ def cadastro_ordens_servicos():
         # Verificar se já existe
         ordem_check = select(Ordem).where(Ordem.status == status)
         ordem_existente = db_session.execute(ordem_check).scalar()
+
+        if ordem_existente:
+            return jsonify({"Msg": f"Ordem já existente"}), 400
+
+        nova_ordem = Ordem(data_abertura=data_abertura, descricao_servico=descricao_servico, status=status, valor_estimado=valor_estimado)
+        nova_ordem.set_senha_hash(senha)
+        nova_ordem.save(db_session)
+
+        ordem_id = nova_ordem.id
+        return jsonify({"msg": "Ordem criado com sucesso", "ordem_id": ordem_id}), 201
+    except SQLAlchemyError as e:
+        return jsonify({"Msg": f"Erro ao registrar ordem: {str(e)}"}), 500
+    # Fecha a sessão e abre outra, por segurança
+    finally:
+        db_session.close()
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5001)
