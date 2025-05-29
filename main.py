@@ -36,7 +36,7 @@ def cadastro_cliente():
     email = dados['email']
     senha = dados['senha']
 
-    if not nome or not email or not cpf or not telefone:
+    if not nome or not senha:
         return jsonify({"msg": "Nome de usuário e senha são obrigatórios"}), 400
 
     db_session = Local_session()
@@ -83,9 +83,10 @@ def cadastro_veiculo():
     placa = dados['placa']
     ano_fabricacao = dados['ano_fabricacao']
     marca = dados['marca']
+    senha = dados['senha']
 
-    if not cliente_associado or not modelo or not placa or not ano_fabricacao or not marca:
-        return  jsonify({"msg": "Informações obrigatórias não cumpridas"}), 400
+    if not cliente_associado or not senha:
+        return  jsonify({"msg": "Insira o cliente associado e a senha"}), 400
 
     db_session = Local_session()
     try:
@@ -131,9 +132,10 @@ def cadastro_ordens_servicos():
     descricao_servico = dados['descricao_servico']
     status = dados['status']
     valor_estimado = dados['valor_estimado']
+    senha = dados['senha']
 
-    if not veiculo_associado or not data_abertura or not descricao_servico or not status or not valor_estimado:
-        return jsonify({"msg": "Informações obrigatórias não cumpridas"}), 400
+    if not veiculo_associado or not senha:
+        return jsonify({"msg": "Insira o veiculo associado e a senha"}), 400
 
     db_session = Local_session()
     try:
