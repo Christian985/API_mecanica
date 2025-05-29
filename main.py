@@ -3,14 +3,8 @@ from sqlalchemy import create_engine, select
 from sqlalchemy.exc import SQLAlchemyError
 from models import Veiculo, Cliente, Ordem, Local_session
 from flask import Flask, request, redirect, url_for, request, jsonify
-from flask_pydantic_spec import FlaskPydanticSpec
 
 app = Flask(__name__)
-
-spec = FlaskPydanticSpec('flask',
-                         title='AutoTech Serviços',
-                         version='1.0.0', )
-spec.register(app)
 
 
 @app.route('/clientes', methods=['GET'])
@@ -86,7 +80,7 @@ def cadastro_veiculo():
     senha = dados['senha']
 
     if not cliente_associado or not senha:
-        return  jsonify({"msg": "Insira o cliente associado e a senha"}), 400
+        return jsonify({"msg": "Insira o cliente associado e a senha"}), 400
 
     db_session = Local_session()
     try:
@@ -97,7 +91,8 @@ def cadastro_veiculo():
         if veiculo_existente:
             return jsonify({"msg": "Veículo já existente"}), 400
 
-        novo_veiculo = Veiculo(cliente_associado=cliente_associado, modelo=modelo, placa=placa, ano_fabricacao=ano_fabricacao, marca=marca)
+        novo_veiculo = Veiculo(cliente_associado=cliente_associado, modelo=modelo, placa=placa,
+                               ano_fabricacao=ano_fabricacao, marca=marca)
         novo_veiculo.set_senha_hash(senha)
         novo_veiculo.save(db_session)
 
@@ -146,7 +141,8 @@ def cadastro_ordens_servicos():
         if ordem_existente:
             return jsonify({"Msg": f"Ordem já existente"}), 400
 
-        nova_ordem = Ordem(data_abertura=data_abertura, descricao_servico=descricao_servico, status=status, valor_estimado=valor_estimado)
+        nova_ordem = Ordem(data_abertura=data_abertura, descricao_servico=descricao_servico, status=status,
+                           valor_estimado=valor_estimado)
         nova_ordem.set_senha_hash(senha)
         nova_ordem.save(db_session)
 
@@ -157,6 +153,7 @@ def cadastro_ordens_servicos():
     # Fecha a sessão e abre outra, por segurança
     finally:
         db_session.close()
+
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5001)

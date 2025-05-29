@@ -7,7 +7,7 @@ from models import Veiculo, Cliente, Ordem, Local_session
 # Main
 def main(page: ft.Page):
     # Configurações
-    page.title = "Mecnica"
+    page.title = "Mecânica"
     page.theme_mode = ft.ThemeMode.DARK  # ou ft.ThemeMode.DARK
     page.window.width = 375
     page.window.height = 667
@@ -37,8 +37,8 @@ def main(page: ft.Page):
             input_placa.value = ""
             input_ano_fabricacao.value = ""
             input_marca.value = ""
-            db_session.add(obj_user)
-            db_session.commit()
+            Local_session.add(obj_user)
+            Local_session.commit()
             # Overlay vai apagar a mensagem anterior
             page.overlay.append(msg_sucesso)
             # Vai abrir a mensagem
@@ -53,35 +53,57 @@ def main(page: ft.Page):
     def gerencia_rotas(e):
         page.views.clear()
         page.views.append(
-            View(  # Primeira Página
+            View(  # Início
                 "/",
                 [
                     AppBar(title=Text("Home"), bgcolor=Colors.PRIMARY_CONTAINER),
-                    input_cliente_associado,
-                    input_modelo,
-                    input_placa,
-                    input_ano_fabricacao,
-                    input_marca,
-                    # Irá salvar os Dados
                     ft.Button(
-                        text="Salvar",
-                        on_click=lambda _: salvar_veiculo(e),
+                        text="Cadastrar veículos",
+                        on_click=lambda _: page.go("cadastro_veiculos"),
                     ),
-                    # Irá mostrar os Dados
                     ft.Button(
-                        text="Exibir lista",
-                        on_click=lambda _: page.go("/segunda"),
+                        text="Cadastrar clientes",
+                        on_click=lambda _: page.go("cadastro_clientes"),
+                    ),
+                    ft.Button(
+                        text="Cadastrar ordens",
+                        on_click=lambda _: page.go("cadastro_ordens"),
                     )
                 ],
             )
         )
-        # Segunda Página
-        if page.route == "/segunda" or page.route == "/terceira":
+        # Cadastro de veículos
+        if page.route == "/cadastro_veiculos" or page.route == "/lista_veiculos":
             page.views.append(
                 View(
-                    "/segunda",
+                    "/cadastro_veiculos",
                     [
-                        AppBar(title=Text("Lista"), bgcolor=Colors.SECONDARY_CONTAINER),
+                        AppBar(title=Text("Cadastro de Veículos"), bgcolor=Colors.PRIMARY_CONTAINER),
+                        input_cliente_associado,
+                        input_modelo,
+                        input_placa,
+                        input_ano_fabricacao,
+                        input_marca,
+                        # Irá salvar os Dados
+                        ft.Button(
+                            text="Salvar",
+                            on_click=lambda _: salvar_veiculo(e),
+                        ),
+                        # Irá mostrar os Dados
+                        ft.Button(
+                            text="Exibir lista",
+                            on_click=lambda _: page.go("/cadastro_veiculos"),
+                        )
+                    ],
+                )
+            )
+        # Lista de Veículos
+        if page.route == "/lista_veiculos":
+            page.views.append(
+                View(
+                    "/Lista_veiculos",
+                    [
+                        AppBar(title=Text("Lista de Veículos"), bgcolor=Colors.SECONDARY_CONTAINER),
                         lv_nome,
                         ft.Button(
                             text="ir",
@@ -90,16 +112,40 @@ def main(page: ft.Page):
                     ],
                 )
             )
-        # if page.route == "/terceira":
-        #     page.views.append(
-        #         View(
-        #             "/terceira",
-        #             [
-        #                 AppBar(title=Text("Lista"), bgcolor=Colors.SECONDARY_CONTAINER),
-        #                 lv_nome,
-        #             ],
-        #         )
-        #     )
+        # Cadastro de Clientes
+        if page.route == "/cadastro_clientes" or page.route == "/lista_clientes":
+            page.views.append(
+                View(
+                    "/cadastro_clientes",
+                    [
+                        AppBar(title=Text("Cadastro de Clientes"), bgcolor=Colors.PRIMARY_CONTAINER),
+                        input_nome,
+                        input_cpf,
+                        input_telefone,
+                        input_endereço,
+                        input_email,
+                        ft.Button(
+                            text="Salvar",
+                            on_click=lambda _: page.go("lista_clientes"),
+                        )
+                    ]
+                )
+            )
+        # Lista de Clientes
+        if page.route == "/lista_clientes":
+            page.views.append(
+                View(
+                    "/Lista_clientes",
+                    [
+                        AppBar(title=Text("Lista de Clientes"), bgcolor=Colors.SECONDARY_CONTAINER),
+                        lv_nome,
+                        ft.Button(
+                            text="ir",
+                            on_click=lambda _: page.go("/terceira"),
+                        )
+                    ],
+                )
+            )
         page.update()
 
     # FIM da Transição de Páginas
@@ -120,12 +166,19 @@ def main(page: ft.Page):
         content=ft.Text("ERRO"),
         bgcolor=Colors.RED
     )
+    # VEÍCULOS
     input_cliente_associado = ft.TextField(label="Cliente Associado")
     input_modelo = ft.TextField(label="Modelo")
     input_placa = ft.TextField(label="Placa")
     input_ano_fabricacao = ft.TextField(label="Ano de Fabricacao")
     input_marca = ft.TextField(label="Marca")
 
+    # CLIENTES
+    input_nome = ft.TextField(label="Nome")
+    input_cpf = ft.TextField(label="CPF")
+    input_telefone = ft.TextField(label="Telefone")
+    input_endereço = ft.TextField(label="Endereço")
+    input_email = ft.TextField(label="E-mail")
     lv_nome = ft.ListView(
         height=500
     )
