@@ -7,7 +7,7 @@ from models import Veiculo, Cliente, Ordem, Local_session
 # Main
 def main(page: ft.Page):
     # Configurações
-    page.title = "Mecanica"
+    page.title = "Mecânica"
     page.theme_mode = ft.ThemeMode.DARK  # ou ft.ThemeMode.DARK
     page.window.width = 375
     page.window.height = 667
