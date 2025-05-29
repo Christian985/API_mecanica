@@ -23,6 +23,7 @@ def clientes():
     for cliente in resultado_clientes:
         lista_clientes.append(cliente.serialize_user())
         print(lista_clientes[-1])
+    # Fecha a sessão e abre outra, por segurança
     db_session.close()
     return jsonify(lista_de_clientes=lista_clientes)
 
@@ -70,6 +71,8 @@ def veiculos():
     for veiculo in resultado_veiculos:
         lista_veiculos.append(veiculo.serialize_user())
         print(lista_veiculos[-1])
+    # Fecha a sessão e abre outra, por segurança
+    db_session.close()
     return jsonify(lista_de_veiculos=lista_veiculos)
 
 
@@ -116,6 +119,8 @@ def ordens_servicos():
     for ordem in resultado_ordens:
         lista_ordens.append(ordem.serialize_user())
         print(lista_ordens[-1])
+    # Fecha a sessão e abre outra, por segurança
+    db_session.close()
     return jsonify(lista_de_ordens=lista_ordens)
 
 
