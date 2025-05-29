@@ -1,7 +1,6 @@
 import requests
 from sqlalchemy import create_engine, select
 from sqlalchemy.exc import SQLAlchemyError
-
 from models import Veiculo, Cliente, Ordem, Local_session
 from flask import Flask, request, redirect, url_for, request, jsonify
 from flask_pydantic_spec import FlaskPydanticSpec
