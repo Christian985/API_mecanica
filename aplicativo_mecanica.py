@@ -13,7 +13,7 @@ def main(page: ft.Page):
     page.window.height = 667
 
     # Funções
-    # Salva as informações!
+    # Salva as informações dos veículos
     def salvar_veiculo(e):
         # Caso eles não possuam valores
         if input_cliente_associado.value == "" or input_modelo.value == "" or input_placa.value == "" or input_ano_fabricacao.value == "" or input_marca.value == "":
@@ -23,7 +23,7 @@ def main(page: ft.Page):
             msg_erro.open = True
             page.update()
         else:
-            obj_user = Veiculo(
+            obj_veiculo = Veiculo(
                 cliente_associado=input_cliente_associado.value,
                 modelo=input_modelo.value,
                 placa=input_placa.value,
@@ -37,7 +37,7 @@ def main(page: ft.Page):
             input_placa.value = ""
             input_ano_fabricacao.value = ""
             input_marca.value = ""
-            Local_session.add(obj_user)
+            Local_session.add(obj_veiculo)
             Local_session.commit()
             # Overlay vai apagar a mensagem anterior
             page.overlay.append(msg_sucesso)
@@ -45,7 +45,75 @@ def main(page: ft.Page):
             msg_sucesso.open = True
             page.update()
 
-    # FIM do salvamento
+    # FIM do salvamento de Veículos
+
+    # Salva as informações dos Clientes
+    def salvar_cliente(e):
+        # Caso eles não possuam valores
+        if input_nome.value == "" or input_cpf.value == "" or input_email.value == "" or input_telefone.value == "" or input_endereco.value == "":
+            # Overlay vai apagar a mensagem anterior
+            page.overlay.append(msg_erro)
+            # Vai abrir a mensagem
+            msg_erro.open = True
+            page.update()
+        else:
+            obj_cliente = Cliente(
+                nome=input_nome.value,
+                cpf=input_cpf.value,
+                email=input_email.value,
+                telefone=input_telefone.value,
+                endereco=input_endereco.value,
+
+            )
+            # Adiciona o Valor de cliente_associado, modelo, placa, ano_fabricacao e marca na Lista
+            input_nome.value = ""
+            input_cpf.value = ""
+            input_email.value = ""
+            input_telefone.value = ""
+            input_endereco.value = ""
+            Local_session.add(obj_cliente)
+            Local_session.commit()
+            # Overlay vai apagar a mensagem anterior
+            page.overlay.append(msg_sucesso)
+            # Vai abrir a mensagem
+            msg_sucesso.open = True
+            page.update()
+
+    # FIM do salvamento de Clientes
+
+    # Salva as informações das Ordens
+    def salvar_ordem(e):
+        # Caso eles não possuam valores
+        if input_veiculo_associado.value == "" or input_data_abertura.value == "" or input_descricao_servico.value == "" or input_status.value == "" or input_valor_estimado.value == "":
+            # Overlay vai apagar a mensagem anterior
+            page.overlay.append(msg_erro)
+            # Vai abrir a mensagem
+            msg_erro.open = True
+            page.update()
+        else:
+            obj_ordem = Ordem(
+                veiculo_associado=input_veiculo_associado.value,
+                data_abertura=input_data_abertura.value,
+                descricao_servico=input_descricao_servico.value,
+                status=input_status.value,
+                valor_estimado=input_valor_estimado.value,
+
+            )
+            # Adiciona o Valor de veiculo_associado, data_abertura, descricao_servico, status e valor_estimado na Lista
+            input_veiculo_associado.value = ""
+            input_data_abertura.value = ""
+            input_descricao_servico.value = ""
+            input_status.value = ""
+            input_valor_estimado.value = ""
+            Local_session.add(obj_ordem)
+            Local_session.commit()
+            # Overlay vai apagar a mensagem anterior
+            page.overlay.append(msg_sucesso)
+            # Vai abrir a mensagem
+            msg_sucesso.open = True
+            page.update()
+
+    # FIM do salvamento das Ordens
 
     # FIM da exibição da lista
 
@@ -56,20 +124,24 @@ def main(page: ft.Page):
             View(  # Início
                 "/",
                 [
-                    AppBar(title=Text("Home"), bgcolor=Colors.PRIMARY_CONTAINER),
+                    AppBar(title=Text("Home"), bgcolor=Colors.PURPLE_900),
                     ft.Button(
                         text="Cadastrar Veículos",
                         on_click=lambda _: page.go("cadastro_veiculos"),
+                        bgcolor=Colors.PURPLE_900,
                     ),
                     ft.Button(
                         text="Cadastrar Clientes",
                         on_click=lambda _: page.go("cadastro_clientes"),
+                        bgcolor=Colors.PURPLE_900,
                     ),
                     ft.Button(
                         text="Cadastrar Ordens",
                         on_click=lambda _: page.go("cadastro_ordens"),
+                        bgcolor=Colors.PURPLE_900,
                     )
                 ],
+                bgcolor=Colors.GREY_900,
             )
         )
         # Cadastro de veículos
@@ -88,11 +160,13 @@ def main(page: ft.Page):
                         ft.Button(
                             text="Salvar",
                             on_click=lambda _: salvar_veiculo(e),
+                            bgcolor=Colors.PURPLE_900,
                         ),
                         # Irá mostrar os Dados
                         ft.Button(
                             text="Exibir lista",
                             on_click=lambda _: page.go("/cadastro_veiculos"),
+                            bgcolor=Colors.PURPLE_900,
                         )
                     ],
                 )
@@ -106,8 +180,9 @@ def main(page: ft.Page):
                         AppBar(title=Text("Lista de Veículos"), bgcolor=Colors.SECONDARY_CONTAINER),
                         lv_nome,
                         ft.Button(
-                            text="ir",
-                            on_click=lambda _: page.go("/terceira"),
+                            text="Sair",
+                            on_click=lambda _: page.go("/"),
+                            bgcolor=Colors.PURPLE_900,
                         )
                     ],
                 )
@@ -126,7 +201,12 @@ def main(page: ft.Page):
                         input_email,
                         ft.Button(
                             text="Salvar",
-                            on_click=lambda _: page.go("lista_clientes"),
+                            on_click=lambda _: salvar_cliente(e),
+                            bgcolor=Colors.PURPLE_900,
+                        ),
+                        ft.Button(
+                            text="Exibir lista",
+                            on_click=lambda _: page.go("/lista_clientes"),
                         )
                     ]
                 )
@@ -138,10 +218,12 @@ def main(page: ft.Page):
                     "/Lista_clientes",
                     [
                         AppBar(title=Text("Lista de Clientes"), bgcolor=Colors.SECONDARY_CONTAINER),
+                        salvar_cliente,
                         lv_nome,
                         ft.Button(
-                            text="ir",
-                            on_click=lambda _: page.go("/terceira"),
+                            text="Sair",
+                            on_click=lambda _: page.go("/"),
+                            bgcolor=Colors.PURPLE_900,
                         )
                     ],
                 )
@@ -161,6 +243,7 @@ def main(page: ft.Page):
                         ft.Button(
                             text="Salvar",
                             on_click=lambda _: page.go("lista_ordens"),
+                            bgcolor=Colors.PURPLE_900,
                         )
                     ]
                 )
@@ -176,6 +259,7 @@ def main(page: ft.Page):
                             ft.Button(
                                 text="ir",
                                 on_click=lambda _: page.go("/terceira"),
+                                bgcolor=Colors.PURPLE_900,
                             )
                         ],
                     )
