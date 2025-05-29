@@ -43,7 +43,6 @@ def cadastro_cliente():
             return jsonify({"msg": "Usuário já existe"}), 400
 
         novo_usuario = Cliente(nome=nome, cpf=cpf, telefone=telefone, email=email)
-        novo_usuario.set_senha_hash(senha)
         novo_usuario.save(db_session)
 
         user_id = novo_usuario.id
@@ -77,10 +76,6 @@ def cadastro_veiculo():
     placa = dados['placa']
     ano_fabricacao = dados['ano_fabricacao']
     marca = dados['marca']
-    senha = dados['senha']
-
-    if not cliente_associado or not senha:
-        return jsonify({"msg": "Insira o cliente associado e a senha"}), 400
 
     db_session = Local_session()
     try:
@@ -93,7 +88,6 @@ def cadastro_veiculo():
 
         novo_veiculo = Veiculo(cliente_associado=cliente_associado, modelo=modelo, placa=placa,
                                ano_fabricacao=ano_fabricacao, marca=marca)
-        novo_veiculo.set_senha_hash(senha)
         novo_veiculo.save(db_session)
 
         veiculo_id = novo_veiculo.id
@@ -127,10 +121,6 @@ def cadastro_ordens_servicos():
     descricao_servico = dados['descricao_servico']
     status = dados['status']
     valor_estimado = dados['valor_estimado']
-    senha = dados['senha']
-
-    if not veiculo_associado or not senha:
-        return jsonify({"msg": "Insira o veiculo associado e a senha"}), 400
 
     db_session = Local_session()
     try:
@@ -143,7 +133,6 @@ def cadastro_ordens_servicos():
 
         nova_ordem = Ordem(data_abertura=data_abertura, descricao_servico=descricao_servico, status=status,
                            valor_estimado=valor_estimado)
-        nova_ordem.set_senha_hash(senha)
         nova_ordem.save(db_session)
 
         ordem_id = nova_ordem.id

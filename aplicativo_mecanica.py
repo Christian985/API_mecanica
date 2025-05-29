@@ -127,17 +127,17 @@ def main(page: ft.Page):
                     AppBar(title=Text("Home"), bgcolor=Colors.PURPLE_900),
                     ft.Button(
                         text="Cadastrar Veículos",
-                        on_click=lambda _: page.go("cadastro_veiculos"),
+                        on_click=lambda _: page.go("/cadastro_veiculos"),
                         bgcolor=Colors.PURPLE_900,
                     ),
                     ft.Button(
                         text="Cadastrar Clientes",
-                        on_click=lambda _: page.go("cadastro_clientes"),
+                        on_click=lambda _: page.go("/cadastro_clientes"),
                         bgcolor=Colors.PURPLE_900,
                     ),
                     ft.Button(
                         text="Cadastrar Ordens",
-                        on_click=lambda _: page.go("cadastro_ordens"),
+                        on_click=lambda _: page.go("/cadastro_ordens"),
                         bgcolor=Colors.PURPLE_900,
                     )
                 ],
@@ -178,6 +178,7 @@ def main(page: ft.Page):
                     "/Lista_veiculos",
                     [
                         AppBar(title=Text("Lista de Veículos"), bgcolor=Colors.SECONDARY_CONTAINER),
+                        salvar_veiculo,
                         lv_nome,
                         ft.Button(
                             text="Sair",
@@ -255,6 +256,7 @@ def main(page: ft.Page):
                         "/Lista_ordens",
                         [
                             AppBar(title=Text("Lista de Ordens"), bgcolor=Colors.SECONDARY_CONTAINER),
+                            salvar_ordem,
                             lv_nome,
                             ft.Button(
                                 text="ir",
