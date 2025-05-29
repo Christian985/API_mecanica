@@ -77,9 +77,9 @@ class Veiculo(Base):
             raise e
 
     # Função para Deletar no Banco
-    def delete(self):
-        db_session.delete(self)
-        db_session.commit()
+    # def delete(self):
+    #     db_session.delete(self)
+    #     db_session.commit()
 
     # Coloca os Dados na Tabela
     def serialize_user(self):
@@ -134,9 +134,9 @@ class Cliente(Base):
             raise e
 
     # Função para Deletar
-    def delete(self):
-        db_session.delete(self)
-        db_session.commit()
+    # def delete(self):
+    #     db_session.delete(self)
+    #     db_session.commit()
 
     # Coloca os Dados na Tabela
     def serialize_user(self):
@@ -192,9 +192,9 @@ class Ordem(Base):
             raise e
 
     # Função para Deletar
-    def delete(self):
-        db_session.delete(self)
-        db_session.commit()
+    # def delete(self):
+    #     db_session.delete(self)
+    #     db_session.commit()
 
     # Coloca os Dados na Tabela
     def serialize_user(self):
