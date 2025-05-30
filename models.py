@@ -168,7 +168,7 @@ class Ordem(Base):
     # Tabela de Ordens e Serviços
     __tablename__ = 'ordens'
     id = Column(Integer, primary_key=True)
-    veiculo_associado = Column(String(100), nullable=False, index=True, ForeignKey=Cliente.id)
+    veiculo_associado = Column(Integer, ForeignKey('Cliente.id'), nullable=False, index=True)
     data_abertura = Column(String(100), nullable=False, index=True)
     descricao_servico = Column(String(100), nullable=False, index=True)
     status = Column(String(100), nullable=False, index=True)
