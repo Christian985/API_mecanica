@@ -131,7 +131,7 @@ def cadastro_ordens_servicos():
         if ordem_existente:
             return jsonify({"Msg": f"Ordem já existente"}), 400
 
-        nova_ordem = Ordem(data_abertura=data_abertura, descricao_servico=descricao_servico, status=status,
+        nova_ordem = Ordem(veiculo_associado=veiculo_associado, data_abertura=data_abertura, descricao_servico=descricao_servico, status=status,
                            valor_estimado=valor_estimado)
         nova_ordem.save(db_session)
 
