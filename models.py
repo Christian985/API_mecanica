@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine, Column, Integer, String
+from sqlalchemy import create_engine, Column, Integer, String, ForeignKey
 from sqlalchemy.orm import scoped_session, sessionmaker, declarative_base
 from dotenv import load_dotenv
 import os  # Criar variável de ambiente '.env'
@@ -168,7 +168,7 @@ class Ordem(Base):
     # Tabela de Ordens e Serviços
     __tablename__ = 'ordens'
     id = Column(Integer, primary_key=True)
-    veiculo_associado = Column(String(100), nullable=False, index=True)
+    veiculo_associado = Column(String(100), nullable=False, index=True, ForeignKey=Cliente.id)
     data_abertura = Column(String(100), nullable=False, index=True)
     descricao_servico = Column(String(100), nullable=False, index=True)
     status = Column(String(100), nullable=False, index=True)

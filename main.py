@@ -28,10 +28,11 @@ def cadastro_cliente():
     cpf = dados['cpf']
     telefone = dados['telefone']
     email = dados['email']
-    senha = dados['senha']
+    endereco = dados['endereco']
+    # senha = dados['senha']
 
-    if not nome or not senha:
-        return jsonify({"msg": "Nome de usuário e senha são obrigatórios"}), 400
+    # if not nome or not senha:
+    #     return jsonify({"msg": "Nome de usuário e senha são obrigatórios"}), 400
 
     db_session = Local_session()
     try:
@@ -42,7 +43,7 @@ def cadastro_cliente():
         if usuario_existente:
             return jsonify({"msg": "Usuário já existe"}), 400
 
-        novo_usuario = Cliente(nome=nome, cpf=cpf, telefone=telefone, email=email)
+        novo_usuario = Cliente(nome=nome, cpf=cpf, telefone=telefone, email=email, endereco=endereco)
         novo_usuario.save(db_session)
 
         user_id = novo_usuario.id
