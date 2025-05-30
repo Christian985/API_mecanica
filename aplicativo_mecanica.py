@@ -150,7 +150,7 @@ def main(page: ft.Page):
                 View(
                     "/cadastro_veiculos",
                     [
-                        AppBar(title=Text("Cadastro de Veículos"), bgcolor=Colors.PRIMARY_CONTAINER),
+                        AppBar(title=Text("Cadastro de Veículos"), bgcolor=Colors.PURPLE_900),
                         input_cliente_associado,
                         input_modelo,
                         input_placa,
@@ -177,7 +177,7 @@ def main(page: ft.Page):
                 View(
                     "/Lista_veiculos",
                     [
-                        AppBar(title=Text("Lista de Veículos"), bgcolor=Colors.SECONDARY_CONTAINER),
+                        AppBar(title=Text("Lista de Veículos"), bgcolor=Colors.PURPLE_900),
                         salvar_veiculo,
                         lv_nome,
                         ft.Button(
@@ -194,7 +194,7 @@ def main(page: ft.Page):
                 View(
                     "/cadastro_clientes",
                     [
-                        AppBar(title=Text("Cadastro de Clientes"), bgcolor=Colors.PRIMARY_CONTAINER),
+                        AppBar(title=Text("Cadastro de Clientes"), bgcolor=Colors.PURPLE_900),
                         input_nome,
                         input_cpf,
                         input_telefone,
@@ -218,7 +218,7 @@ def main(page: ft.Page):
                 View(
                     "/Lista_clientes",
                     [
-                        AppBar(title=Text("Lista de Clientes"), bgcolor=Colors.SECONDARY_CONTAINER),
+                        AppBar(title=Text("Lista de Clientes"), bgcolor=Colors.PURPLE_900),
                         salvar_cliente,
                         lv_nome,
                         ft.Button(
@@ -235,7 +235,7 @@ def main(page: ft.Page):
                 View(
                     "/cadastro_ordens",
                     [
-                        AppBar(title=Text("Cadastro de Ordens"), bgcolor=Colors.PRIMARY_CONTAINER),
+                        AppBar(title=Text("Cadastro de Ordens"), bgcolor=Colors.PURPLE_900),
                         input_veiculo_associado,
                         input_data_abertura,
                         input_descricao_servico,
@@ -255,7 +255,7 @@ def main(page: ft.Page):
                     View(
                         "/Lista_ordens",
                         [
-                            AppBar(title=Text("Lista de Ordens"), bgcolor=Colors.SECONDARY_CONTAINER),
+                            AppBar(title=Text("Lista de Ordens"), bgcolor=Colors.PURPLE_900),
                             salvar_ordem,
                             lv_nome,
                             ft.Button(
