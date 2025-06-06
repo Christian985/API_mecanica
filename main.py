@@ -66,7 +66,7 @@ def veiculos():
         print(lista_veiculos[-1])
     # Fecha a sessão e abre outra, por segurança
     db_session.close()
-    return jsonify(lista_de_veiculos=lista_veiculos)
+    return jsonify(lista_veiculos)
 
 
 @app.route('/veiculos', methods=['POST'])
