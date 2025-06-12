@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine, Column, Integer, String, ForeignKey
+from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, Float
 from sqlalchemy.orm import scoped_session, sessionmaker, declarative_base
 from dotenv import load_dotenv
 import os  # Criar variável de ambiente '.env'
@@ -111,9 +111,9 @@ class Cliente(Base):
     __tablename__ = 'clientes'
     id = Column(Integer, primary_key=True)
     nome = Column(String(100), nullable=False, index=True)
-    cpf = Column(Integer, nullable=False, index=True)
+    cpf = Column(String, nullable=False, index=True)
     email = Column(String(100), nullable=False, index=True)
-    telefone = Column(Integer, nullable=False, index=True)
+    telefone = Column(String, nullable=False, index=True)
     endereco = Column(String(100), nullable=False, index=True)
 
     # Representação Classe
@@ -172,7 +172,7 @@ class Ordem(Base):
     data_abertura = Column(String(100), nullable=False, index=True)
     descricao_servico = Column(String(100), nullable=False, index=True)
     status = Column(String(100), nullable=False, index=True)
-    valor_estimado = Column(Integer, nullable=False, index=True)
+    valor_estimado = Column(Float, nullable=False, index=True)
 
     # Representação de Classe
     def __repr__(self):

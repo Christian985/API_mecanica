@@ -18,7 +18,7 @@ def clientes():
         print(lista_clientes[-1])
     # Fecha a sessão e abre outra, por segurança
     db_session.close()
-    return jsonify(lista_de_clientes=lista_clientes)
+    return jsonify(lista_clientes)
 
 
 @app.route('/clientes', methods=['POST'])
@@ -111,7 +111,7 @@ def ordens_servicos():
         print(lista_ordens[-1])
     # Fecha a sessão e abre outra, por segurança
     db_session.close()
-    return jsonify(lista_de_ordens=lista_ordens)
+    return jsonify(lista_ordens)
 
 
 @app.route('/ordem', methods=['POST'])
