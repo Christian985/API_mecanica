@@ -99,14 +99,16 @@ def cadastro_veiculo():
     finally:
         db_session.close()
 
+
 @app.route('/veiculos', methods=['PUT'])
-def cadastro_veiculo_update():
+def atualizar_veiculo():
     dados = request.get_json()
     cliente_associado = dados['cliente_associado']
     modelo = dados['modelo']
     placa = dados['placa']
     ano_fabricacao = dados['ano_fabricacao']
     marca = dados['marca']
+
     db_session = Local_session()
 
 
@@ -142,7 +144,8 @@ def cadastro_ordens_servicos():
         if ordem_existente:
             return jsonify({"Msg": f"Ordem já existente"}), 400
 
-        nova_ordem = Ordem(veiculo_associado=veiculo_associado, data_abertura=data_abertura, descricao_servico=descricao_servico, status=status,
+        nova_ordem = Ordem(veiculo_associado=veiculo_associado, data_abertura=data_abertura,
+                           descricao_servico=descricao_servico, status=status,
                            valor_estimado=valor_estimado)
         nova_ordem.save(db_session)
 
