@@ -99,6 +99,16 @@ def cadastro_veiculo():
     finally:
         db_session.close()
 
+@app.route('/veiculos', methods=['PUT'])
+def cadastro_veiculo_update():
+    dados = request.get_json()
+    cliente_associado = dados['cliente_associado']
+    modelo = dados['modelo']
+    placa = dados['placa']
+    ano_fabricacao = dados['ano_fabricacao']
+    marca = dados['marca']
+    db_session = Local_session()
+
 
 @app.route('/ordem', methods=['GET'])
 def ordens_servicos():
