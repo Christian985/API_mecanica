@@ -124,7 +124,7 @@ def main(page: ft.Page):
             View(  # Início
                 "/",
                 [
-                    AppBar(title=Text("Home"), bgcolor=Colors.PURPLE_900),
+                    AppBar(title=Text("Cadastros"), bgcolor=Colors.PURPLE_900),
                     ft.Button(
                         text="Cadastrar Veículos",
                         on_click=lambda _: page.go("/cadastro_veiculos"),
