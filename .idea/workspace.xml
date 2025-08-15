@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5fa1efd7-36af-4a66-b08f-6d4e3da2f3ac" name="Changes" comment="commit">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/ddb56eb1-9305-4d2d-98d9-61f8ab713657.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/ddb56eb1-9305-4d2d-98d9-61f8ab713657/storage_v2/_src_/schema/main.uQUzAA.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aplicativo_mecanica.py" beforeDir="false" afterPath="$PROJECT_DIR$/aplicativo_mecanica.py" afterDir="false" />
-    </list>
+    <list default="true" id="5fa1efd7-36af-4a66-b08f-6d4e3da2f3ac" name="Changes" comment="commit" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -113,7 +107,7 @@
       <workItem from="1755169472731" duration="632000" />
       <workItem from="1755193794359" duration="3559000" />
       <workItem from="1755255012365" duration="2244000" />
-      <workItem from="1755260420765" duration="326000" />
+      <workItem from="1755260420765" duration="644000" />
     </task>
     <task id="LOCAL-00001" summary="commit">
       <option name="closed" value="true" />
@@ -379,7 +373,15 @@
       <option name="project" value="LOCAL" />
       <updated>1749754348222</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="commit">
+      <option name="closed" value="true" />
+      <created>1755260756049</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1755260756049</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

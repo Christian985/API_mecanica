@@ -100,14 +100,14 @@ def cadastro_veiculo():
         db_session.close()
 
 
-@app.route('/veiculos', methods=['PUT'])
-def atualizar_veiculo():
-    dados = request.get_json()
-    cliente_associado = dados['cliente_associado']
-    modelo = dados['modelo']
-    placa = dados['placa']
-    ano_fabricacao = dados['ano_fabricacao']
-    marca = dados['marca']
+# @app.route('/veiculos', methods=['PUT'])
+# def atualizar_veiculo():
+    # dados = request.get_json()
+    # cliente_associado = dados['cliente_associado']
+    # modelo = dados['modelo']
+    # placa = dados['placa']
+    # ano_fabricacao = dados['ano_fabricacao']
+    # marca = dados['marca']
 
     db_session = Local_session()
 
